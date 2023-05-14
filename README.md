@@ -1,14 +1,14 @@
-cookiecutter-pypackage-minimal
-==============================
+cookiecutter-pypackage-lp
+=========================
 
-An opinionated, minimal [cookiecutter](https://github.com/audreyr/cookiecutter) template for Python packages, and some guidelines for Python packaging.
+An opinionated, minimal [cookiecutter](https://github.com/audreyr/cookiecutter) template for Python packages, and some choices for Python packaging.
 
 Usage
 -----
 
     pip install cookiecutter
-    git clone https://github.com/kragniz/cookiecutter-pypackage-minimal.git
-    cookiecutter cookiecutter-pypackage-minimal/
+    git clone https://github.com/lpasqualis/cookiecutter-pypackage-lp.git
+    cookiecutter cookiecutter-pypackage-lp/
 
 You should then change the classifiers in `{{ package_name }}/setup.py` - it is assumed that the project will run on the latest versions of Python 2 and 3, so you should remove any classifiers that do not apply. The full list of PyPI classifiers can be found [here](https://pypi.org/classifiers/).
 
@@ -17,7 +17,7 @@ Fill out the README, and - if necessary - [choose a license](https://choosealice
 Explanation
 -----------
 
-The decisions `cookiecutter-pypackage-minimal` makes should all be explained here.
+The decisions `cookiecutter-pypackage-lp` makes should all be explained here.
 
 ### README
 
@@ -43,14 +43,15 @@ The decisions `cookiecutter-pypackage-minimal` makes should all be explained her
 * **setup.py should not import anything from the package**
   When installing from source, the user may not have the packages dependencies installed, and importing the package is likely to raise an `ImportError`.
 * **setup.py should be the canonical source of package dependencies**
-  There is no reason to duplicate dependency specifiers (i.e. also using a `requirements.txt` file). See the testing section below for testing dependencies.
+  There is no reason to duplicate dependency specifiers (i.e. also using a `requirements.txt` file). See the testing section below for testing dependencies. However, it is useful to have
+  a 'requirements_dev.txt' for development
 
 ### Testing
 
 * **Use [Tox](https://tox.readthedocs.io) to manage test environments**
   Tox provides isolation, runs tests across multiple Python versions, and ensures the package can be installed.
-* **Uses [pytest](https://docs.pytest.org) as the default test runner**
-  This can be changed easily, though pytest is a easier, more powerful test library and runner than the standard library's unittest.
+* **Uses unittest as the default test runner**
+  This can be changed easily.
 * **Define testing dependencies in `tox.ini`**
   Avoid duplicating dependency definitions, and use `tox.ini` as the canonical description of how the unittests should be run.
 * **`tests` directory should not be a package**
